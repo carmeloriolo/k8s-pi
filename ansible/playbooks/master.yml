@@ -1,0 +1,41 @@
+---
+- name: Setup K8S Master
+  hosts: master
+  become: yes
+  tasks:
+   - name: "Install prerequisites"
+     apt:
+        name:
+         - apt-transport-https
+         - ca-certificates
+         - curl
+        state: present
+
+   - name: "Add Google Cloud public signing key"
+     apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+   - name: "Add Kubernetes Repository"
+     apt_repository:
+        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: 'kubernetes'
+
+   - name: "Install kubelet, kubeadm, kubectl"
+     apt:
+        name:
+         - kubelet
+         - kubeadm
+         - kubectl
+        state: present
+        update_cache: True
+
+   - name: "Prevent packages from being upgraded"
+     dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+     loop:
+       - kubelet
+       - kubeadm
+       - kubectl

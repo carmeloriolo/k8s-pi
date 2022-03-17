@@ -1,0 +1,3 @@
+[submodule "k8s-pi-keys"]
+	path = k8s-pi-keys
+	url = git@github.com:carmeloriolo/k8s-pi-keys.git

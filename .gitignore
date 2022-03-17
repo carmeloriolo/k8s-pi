@@ -1,0 +1,4 @@
+.DS_Store
+*.retry
+*.sw[o-p]
+ansible_rsa
