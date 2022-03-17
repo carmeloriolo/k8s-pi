@@ -1,41 +1,41 @@
 ---
 - name: Setup K8S Master
   hosts: master
-  become: yes
+  become: true
   tasks:
    - name: "Install prerequisites"
-     apt:
-        name:
-         - apt-transport-https
-         - ca-certificates
-         - curl
-        state: present
+     ansible.builtin.apt:
+      name:
+       - apt-transport-https
+       - ca-certificates
+       - curl
+      state: present
 
    - name: "Add Google Cloud public signing key"
-     apt_key:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        state: present
+     ansible.builtin.apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
 
    - name: "Add Kubernetes Repository"
-     apt_repository:
-        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
-        state: present
-        filename: 'kubernetes'
+     ansible.builtin.apt_repository:
+      repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: 'kubernetes'
 
    - name: "Install kubelet, kubeadm, kubectl"
-     apt:
-        name:
-         - kubelet
-         - kubeadm
-         - kubectl
-        state: present
-        update_cache: True
+     ansible.builtin.apt:
+      name:
+       - kubelet
+       - kubeadm
+       - kubectl
+      state: present
+      update_cache: true
 
    - name: "Prevent packages from being upgraded"
-     dpkg_selections:
-        name: "{{ item }}"
-        selection: hold
+     ansible.builtin.dpkg_selections:
+      name: "{{ item }}"
+      selection: hold
      loop:
-       - kubelet
+      - kubelet
        - kubeadm
        - kubectl
