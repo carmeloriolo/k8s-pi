@@ -2,8 +2,12 @@
 lint:
 	ansible-lint ansible/playbooks/*
 
-.PHONY: master
-apply-master: lint
+.PHONY: check-master
+check-master: lint
+	ansible-playbook ansible/playbooks/master.yml --check -vv
+
+.PHONY: apply-master
+apply-master: lint check-master
 	ansible-playbook ansible/playbooks/master.yml
 
 .PHONY: ping
