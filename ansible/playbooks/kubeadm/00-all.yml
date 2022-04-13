@@ -12,7 +12,15 @@
         state: present
         update_cache: true
 
-    - name: Enable docker service
+    - name: "Set docker cgroup to systemd"
+      copy:
+        dest: "/etc/docker/daemon.json"
+        content: |
+          {
+            "exec-opts": [ "native.cgroupdriver=systemd" ]
+          }
+
+    - name: "Enable docker service"
       ansible.builtin.systemd:
         name: docker
         enabled: yes
@@ -44,6 +52,7 @@
       ansible.builtin.apt:
         name:
           - kubelet
+          - kubeadm
           - kubectl
         state: present
         update_cache: true
@@ -54,10 +63,12 @@
         selection: hold
       loop:
         - kubelet
+        - kubeadm
         - kubectl
 
-    - name: Enable kubelet service
+    - name: "Enable kubelet service"
       ansible.builtin.systemd:
         name: kubelet
         enabled: yes
         masked: no
+
