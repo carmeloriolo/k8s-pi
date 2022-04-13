@@ -2,3 +2,4 @@
 *.retry
 *.sw[o-p]
 ansible_rsa
+.idea

@@ -1,0 +1,19 @@
+---
+- name: Setup K8S Worker Nodes
+  hosts:
+    - masters
+  become: true
+  tasks:
+    - name: "Install kubelet, kubectl"
+      ansible.builtin.apt:
+        name:
+          - kubeadm
+        state: present
+        update_cache: true
+
+    - name: "Prevent packages from being upgraded"
+      ansible.builtin.dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+      loop:
+        - kubeadm
