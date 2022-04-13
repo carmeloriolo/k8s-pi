@@ -2,10 +2,6 @@
 
 ## Cluster
 
-* Raspberry Pi 4 Model B 8 GB RAM (pi-master-01)
-* Raspberry Pi 4 Model B 2 GB RAM (pi-master-01)
-
-**Cluster**
 
 - Raspberry Pi 4 Model B 8 GB RAM 64GB MicroSD (**pi-master-01**)
 - Raspberry Pi 4 Model B 2 GB RAM 64GB MicroSD (**pi-node-01**)
