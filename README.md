@@ -1,6 +1,11 @@
 # k8s-pi
 
+
 ## Cluster
+
+<center>
+    <img src="cluster.jpeg" alt="cluster" width="300"/>
+</center>
 
 
 - Raspberry Pi 4 Model B 8 GB RAM 64GB MicroSD (**pi-master-01**)
