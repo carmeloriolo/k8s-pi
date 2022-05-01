@@ -3,3 +3,6 @@ pi-master-01 ansible_ssh_private_key_file=k8s-pi-keys/pi-master-01 host_key_chec
 
 [workers]
 pi-node-01 ansible_ssh_private_key_file=k8s-pi-keys/pi-node-01 host_key_checking=False
+
+[vagrant]
+127.0.0.1 ansible_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key ansible_ssh_port=2222
